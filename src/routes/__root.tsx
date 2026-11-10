@@ -80,22 +80,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#302321" },
+      { title: "Cheyness Empire" },
+      { name: "description", content: "Skincare and body care rituals from Port Harcourt, Nigeria." },
+      { name: "author", content: "Cheyness Empire" },
+      { property: "og:title", content: "Cheyness Empire" },
+      { property: "og:description", content: "Skincare and body care rituals from Port Harcourt, Nigeria." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        // Skip the entrance overlay instantly if it already played this session.
+        children:
+          "try{if(sessionStorage.getItem('cx-entered')==='1')document.documentElement.classList.add('cx-entered')}catch(e){}",
+      },
     ],
   }),
   shellComponent: RootShell,

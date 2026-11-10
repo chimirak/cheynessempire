@@ -1,9 +1,6 @@
 /*
  * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ * Fonts (Cormorant Garamond + Jost) are loaded with a <link> in src/routes/__root.tsx.
  */
 @import "tailwindcss" source(none);
 @source "../src";
@@ -12,31 +9,33 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * CHEYNESS EMPIRE — "The Quiet Ritual" design system.
+ * Brand palette: ivory (dominant), ivory-deep, espresso (text + dark sections),
+ * rose (emphasis, ~8%), gold (1px hairlines only), sage (labels, selected state).
+ * Every corner is sharp. The arch (.cx-arch) is the only curve on the site.
  */
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost", system-ui, sans-serif;
+
+  --ease-exhale: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  --color-ivory: var(--ivory);
+  --color-ivory-deep: var(--ivory-deep);
+  --color-espresso: var(--espresso);
+  --color-rose: var(--rose);
+  --color-gold: var(--gold);
+  --color-sage: var(--sage);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -73,74 +72,69 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 0px;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Brand */
+  --ivory: oklch(0.966 0.011 76.6); /* #F8F3EC */
+  --ivory-deep: oklch(0.929 0.019 75.3); /* #EFE6DA */
+  --espresso: oklch(0.271 0.02 28.5); /* #302321 */
+  --rose: oklch(0.751 0.077 4.5); /* #D99AA8 */
+  --gold: oklch(0.736 0.086 80.2); /* #C6A46A */
+  --sage: oklch(0.642 0.035 126.5); /* #87917A */
+
+  /* The single permitted gradient family: espresso-to-transparent photo scrims */
+  --scrim-left: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--espresso) 78%, transparent) 0%,
+    color-mix(in oklab, var(--espresso) 40%, transparent) 55%,
+    transparent 100%
+  );
+  --scrim-bottom: linear-gradient(
+    0deg,
+    color-mix(in oklab, var(--espresso) 85%, transparent) 0%,
+    color-mix(in oklab, var(--espresso) 35%, transparent) 50%,
+    transparent 75%
+  );
+  --fade-to-ivory: linear-gradient(180deg, transparent 0%, var(--ivory) 100%);
+  /* Soft rose glow (explicitly requested for Ritual + Final CTA) */
+  --glow-rose: radial-gradient(
+    closest-side,
+    color-mix(in oklab, var(--rose) 100%, transparent) 0%,
+    transparent 100%
+  );
+
+  --background: var(--ivory);
+  --foreground: var(--espresso);
+  --card: var(--ivory);
+  --card-foreground: var(--espresso);
+  --popover: var(--ivory);
+  --popover-foreground: var(--espresso);
+  --primary: var(--espresso);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--ivory-deep);
+  --secondary-foreground: var(--espresso);
+  --muted: var(--ivory-deep);
+  --muted-foreground: color-mix(in oklab, var(--espresso) 72%, var(--ivory));
+  --accent: var(--rose);
+  --accent-foreground: var(--espresso);
+  --destructive: oklch(0.52 0.15 27);
+  --destructive-foreground: var(--ivory);
+  --border: color-mix(in oklab, var(--espresso) 16%, transparent);
+  --input: color-mix(in oklab, var(--espresso) 30%, transparent);
+  --ring: var(--gold);
+  --chart-1: var(--espresso);
+  --chart-2: var(--rose);
+  --chart-3: var(--sage);
+  --chart-4: var(--gold);
+  --chart-5: var(--ivory-deep);
+  --sidebar: var(--ivory);
+  --sidebar-foreground: var(--espresso);
+  --sidebar-primary: var(--espresso);
+  --sidebar-primary-foreground: var(--ivory);
+  --sidebar-accent: var(--ivory-deep);
+  --sidebar-accent-foreground: var(--espresso);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--gold);
 }
 
 @layer base {
@@ -148,8 +142,446 @@
     border-color: var(--color-border);
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--rose) 45%, transparent);
+    color: var(--espresso);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+/* Lenis smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Typography scale */
+@utility t-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(52px, 8.5vw, 140px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+@utility t-statement {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 11vw, 190px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+@utility t-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+@utility t-product {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+}
+@utility t-body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 52ch;
+  @media (min-width: 1024px) {
+    font-size: 18px;
+  }
+}
+@utility t-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  line-height: 1.4;
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
+}
+@utility t-btn {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+/* Layout rhythm: 20 / 56 / 96px side margins, 96 / 160px vertical padding */
+@utility cx-container {
+  width: 100%;
+  padding-inline: 20px;
+  @media (min-width: 768px) {
+    padding-inline: 56px;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 96px;
+  }
+}
+@utility cx-section {
+  padding-block: 96px;
+  @media (min-width: 1280px) {
+    padding-block: 160px;
+  }
+}
+
+/* THE ARCH: fully rounded top, square bottom. The only curve on the site. */
+@utility cx-arch {
+  border-radius: 9999px 9999px 0 0;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+/* Word masks for headline reveals (room for Cormorant descenders) */
+@utility cx-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility ease-exhale {
+  transition-timing-function: var(--ease-exhale);
+}
+
+@layer components {
+  /* Gold underline that draws left to right */
+  .cx-link {
+    position: relative;
+    display: inline-block;
+  }
+  .cx-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms var(--ease-exhale);
+  }
+  .cx-link:hover::after,
+  .cx-link:focus-visible::after,
+  .cx-link[data-active="true"]::after,
+  .cx-link[data-underline="always"]::after {
+    transform: scaleX(1);
+  }
+
+  /* Buttons: sharp corners, wipe fill from the left */
+  .cx-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 52px;
+    padding: 0 2rem;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 0;
+    cursor: pointer;
+    transition:
+      color 350ms var(--ease-exhale),
+      border-color 350ms var(--ease-exhale);
+  }
+  .cx-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 350ms var(--ease-exhale);
+  }
+  .cx-btn:hover::before,
+  .cx-btn:focus-visible::before {
+    transform: scaleX(1);
+  }
+  .cx-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .cx-btn-ivory {
+    background: var(--ivory);
+    color: var(--espresso);
+  }
+  .cx-btn-ivory::before {
+    background: var(--espresso);
+  }
+  .cx-btn-ivory:hover,
+  .cx-btn-ivory:focus-visible {
+    color: var(--ivory);
+  }
+
+  .cx-btn-espresso {
+    background: var(--espresso);
+    color: var(--ivory);
+    border: 1px solid var(--espresso);
+  }
+  .cx-btn-espresso::before {
+    background: var(--ivory);
+  }
+  .cx-btn-espresso:hover,
+  .cx-btn-espresso:focus-visible {
+    color: var(--espresso);
+  }
+
+  .cx-btn-outline {
+    background: transparent;
+    color: var(--espresso);
+    border: 1px solid var(--espresso);
+  }
+  .cx-btn-outline::before {
+    background: var(--espresso);
+  }
+  .cx-btn-outline:hover,
+  .cx-btn-outline:focus-visible {
+    color: var(--ivory);
+  }
+
+  .cx-btn-outline-light {
+    background: transparent;
+    color: var(--ivory);
+    border: 1px solid color-mix(in oklab, var(--ivory) 60%, transparent);
+  }
+  .cx-btn-outline-light::before {
+    background: var(--ivory);
+  }
+  .cx-btn-outline-light:hover,
+  .cx-btn-outline-light:focus-visible {
+    color: var(--espresso);
+  }
+
+  /* Gold-outlined CTA whose border is drawn by an SVG stroke */
+  .cx-btn-gold {
+    background: transparent;
+    color: var(--ivory);
+  }
+  .cx-btn-gold::before {
+    background: var(--ivory);
+  }
+  .cx-btn-gold:hover,
+  .cx-btn-gold:focus-visible {
+    color: var(--espresso);
+  }
+
+  /* Choice tiles in the consultation */
+  .cx-tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 56px;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--espresso);
+    background: transparent;
+    color: var(--espresso);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color 300ms var(--ease-exhale),
+      color 300ms var(--ease-exhale),
+      border-color 300ms var(--ease-exhale);
+  }
+  .cx-tile:hover {
+    background: color-mix(in oklab, var(--espresso) 5%, transparent);
+  }
+  .cx-tile[aria-pressed="true"] {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: var(--ivory);
+  }
+
+  /* Underlined input (newsletter) */
+  .cx-input-line {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--ivory) 45%, transparent);
+    border-radius: 0;
+    color: var(--ivory);
+    padding: 0.85rem 3rem 0.85rem 0;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 16px;
+    transition: border-color 300ms var(--ease-exhale);
+  }
+  .cx-input-line::placeholder {
+    color: color-mix(in oklab, var(--ivory) 55%, transparent);
+  }
+  .cx-input-line:focus {
+    outline: none;
+    border-bottom-color: var(--gold);
+  }
+  .cx-input-line:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* Tactile 3% paper grain over the whole page */
+  .cx-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .cx-glow {
+    background: var(--glow-rose);
+  }
+
+  /* Entrance overlay: skipped instantly once seen this session */
+  .cx-entered .cx-entrance {
+    display: none;
+  }
+
+  /* Custom cursor hides the native cursor only on fine pointers */
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Slow, quiet loops */
+@keyframes cx-drift {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+@keyframes cx-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes cx-cue {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(44px);
+    opacity: 0;
+  }
+}
+@keyframes cx-breathe {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.06;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.1;
+  }
+}
+
+@utility animate-drift {
+  animation: cx-drift 7s ease-in-out infinite;
+}
+@utility animate-sway {
+  animation: cx-sway 9s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+@utility animate-cue {
+  animation: cx-cue 2.4s var(--ease-exhale) infinite;
+}
+@utility animate-breathe {
+  animation: cx-breathe 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift,
+  .animate-sway,
+  .animate-cue,
+  .animate-breathe {
+    animation: none !important;
+  }
+  .cx-btn::before,
+  .cx-link::after {
+    transition-duration: 200ms;
   }
 }

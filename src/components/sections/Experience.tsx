@@ -42,7 +42,7 @@ export function Experience() {
           <motion.div
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-espresso opacity-[0.06]"
-            style={reduced ? undefined : { y: watermarkY }}
+            style={reduced ? {} : { y: watermarkY }}
           >
             <LogoMark className="h-[70vw] max-h-[620px] w-auto lg:h-[44vw]" />
           </motion.div>

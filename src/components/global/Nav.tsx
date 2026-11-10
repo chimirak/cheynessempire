@@ -61,6 +61,7 @@ export function Nav() {
       return () => clearTimeout(t);
     }
     prevCount.current = ritual.length;
+    return undefined;
   }, [ritual.length]);
 
   const light = !scrolled || menuOpen; // ivory text over hero / menu

@@ -23,7 +23,7 @@ export function Leaf({ className, flip = false }: { className?: string; flip?: b
           [60, 84, -1],
           [60, 56, 1],
           [60, 30, -1],
-        ].map(([x, y, dir], i) => {
+        ].map(([x = 60, y = 0, dir = 1], i) => {
           const len = 44 - i * 4;
           const tipX = x + dir * len;
           const tipY = y - len * 0.55;

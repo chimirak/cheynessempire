@@ -32,10 +32,10 @@ export function Edit() {
   const nearestIndex = (left: number) => {
     const cs = cards();
     if (!cs.length) return 0;
-    const base = cs[0].offsetLeft;
+    const base = cs[0]!.offsetLeft;
     let best = 0;
     cs.forEach((c, i) => {
-      if (Math.abs(c.offsetLeft - base - left) < Math.abs(cs[best].offsetLeft - base - left)) best = i;
+      if (Math.abs(c.offsetLeft - base - left) < Math.abs(cs[best]!.offsetLeft - base - left)) best = i;
     });
     return best;
   };
@@ -46,7 +46,7 @@ export function Edit() {
       const cs = cards();
       if (!el || !cs.length) return;
       const clamped = Math.max(0, Math.min(cs.length - 1, i));
-      el.scrollTo({ left: cs[clamped].offsetLeft - cs[0].offsetLeft, behavior: reduced ? "auto" : "smooth" });
+      el.scrollTo({ left: cs[clamped]!.offsetLeft - cs[0]!.offsetLeft, behavior: reduced ? "auto" : "smooth" });
       setIndex(clamped);
     },
     [reduced],
@@ -106,7 +106,7 @@ export function Edit() {
     const projected = el.scrollLeft - d.v * 380;
     const target = nearestIndex(projected);
     const cs = cards();
-    el.scrollTo({ left: cs[target].offsetLeft - cs[0].offsetLeft, behavior: "smooth" });
+    if (cs[target] && cs[0]) el.scrollTo({ left: cs[target].offsetLeft - cs[0].offsetLeft, behavior: "smooth" });
     setIndex(target);
     window.setTimeout(() => {
       el.style.scrollSnapType = "";

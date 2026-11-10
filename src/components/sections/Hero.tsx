@@ -33,7 +33,7 @@ export function Hero() {
       aria-label="Welcome"
       className="relative h-[100svh] min-h-[560px] overflow-hidden bg-espresso text-ivory"
     >
-      <motion.div className="absolute inset-0" style={reduced ? undefined : { y: imageY }}>
+      <motion.div className="absolute inset-0" style={reduced ? {} : { y: imageY }}>
         <HeroImage play={introDone} />
       </motion.div>
 
@@ -46,7 +46,7 @@ export function Hero() {
       {/* Floating arch detail (desktop only) */}
       <motion.div
         className="absolute bottom-[18%] right-[9%] hidden lg:block"
-        style={reduced ? undefined : { opacity: textOpacity }}
+        style={reduced ? {} : { opacity: textOpacity }}
       >
         <div className="animate-drift">
           <ArchImage
@@ -62,7 +62,7 @@ export function Hero() {
 
       <motion.div
         className="cx-container absolute inset-x-0 bottom-0 pb-[104px] md:pb-[150px] lg:pb-[170px]"
-        style={reduced ? undefined : { opacity: textOpacity, y: textY }}
+        style={reduced ? {} : { opacity: textOpacity, y: textY }}
       >
         <Reveal play={introDone} delay={0.4} y={12}>
           <p className="t-eyebrow text-ivory/85">{HERO_COPY.eyebrow}</p>

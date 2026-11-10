@@ -43,7 +43,7 @@ export function useCursor() {
       const t = e.target as Element | null;
       const target = t?.closest?.("[data-cursor]") as HTMLElement | null;
       const dark = Boolean(t?.closest?.('[data-theme="dark"]'));
-      const raw = target?.dataset.cursor ?? "";
+      const raw = target?.dataset["cursor"] ?? "";
       const label = raw === "grow" ? "" : raw;
       const grow = Boolean(target);
       setState((s) =>

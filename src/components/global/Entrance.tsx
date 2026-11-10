@@ -32,6 +32,7 @@ export function Entrance() {
       const t = setTimeout(() => setPhase("lift"), 300);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [setIntroDone]);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export function Entrance() {
       const t = setTimeout(() => setIntroDone(true), reduced ? 0 : 250);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [phase, reduced, setIntroDone]);
 
   return (

@@ -10,7 +10,7 @@ export function CustomerLove() {
   const reduced = useReducedMotion();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
-  const q = QUOTES[i];
+  const q = QUOTES[i] ?? QUOTES[0]!;
   const go = (n: number) => setI((n + QUOTES.length) % QUOTES.length);
 
   useEffect(() => {

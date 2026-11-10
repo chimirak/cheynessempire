@@ -18,8 +18,8 @@ interface ArchImageProps {
   revealDelay?: number;
   priority?: boolean;
   /** Optional scroll-driven scale (e.g. slow zoom while sticky) */
-  scale?: MotionValue<number>;
-  cursor?: "View" | "Drag" | "grow";
+  scale?: MotionValue<number> | undefined;
+  cursor?: "View" | "Drag" | "grow" | undefined;
   sizes?: string;
 }
 
@@ -65,7 +65,7 @@ export function ArchImage({
           height={height}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
-          style={{ objectPosition: position, scale }}
+          style={scale ? { objectPosition: position, scale } : { objectPosition: position }}
           className={cn("h-full w-full object-cover", imgClassName)}
         />
       </motion.div>

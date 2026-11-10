@@ -16,7 +16,7 @@ export function MobileBar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     const footer = document.getElementById("contact");
     const io = footer
-      ? new IntersectionObserver(([e]) => setNearFooter(e.isIntersecting), { rootMargin: "0px 0px 120px 0px" })
+      ? new IntersectionObserver(([e]) => setNearFooter(Boolean(e?.isIntersecting)), { rootMargin: "0px 0px 120px 0px" })
       : null;
     if (footer && io) io.observe(footer);
     return () => {

@@ -26,7 +26,7 @@ function ParallaxArch({
   const y = useTransform(progress, [0, 1], [-travel / 2, travel / 2]);
   const scale = useTransform(progress, [0, 0.55], [0.94, 1]);
   return (
-    <motion.div className={cn("group", className)} style={reduced ? undefined : { y, scale }}>
+    <motion.div className={cn("group", className)} style={reduced ? {} : { y, scale }}>
       <ArchImage
         {...img}
         cursor="grow"

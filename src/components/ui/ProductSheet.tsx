@@ -95,8 +95,8 @@ function SheetBody({ product, desktop }: { product: Product; desktop: boolean })
   const { openProduct, addToRitual, inRitual, setDrawerOpen, closeProduct } = useSite();
   const reduced = useReducedMotion();
   const index = PRODUCTS.findIndex((p) => p.id === product.id);
-  const prev = PRODUCTS[(index - 1 + PRODUCTS.length) % PRODUCTS.length];
-  const next = PRODUCTS[(index + 1) % PRODUCTS.length];
+  const prev = PRODUCTS[(index - 1 + PRODUCTS.length) % PRODUCTS.length]!;
+  const next = PRODUCTS[(index + 1) % PRODUCTS.length]!;
   const added = inRitual(product.id);
 
   const item = (i: number) => ({

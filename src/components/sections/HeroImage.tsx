@@ -33,7 +33,13 @@ export function HeroImage({ play }: { play: boolean }) {
       className="absolute inset-0 overflow-hidden"
       initial={reduced ? { opacity: 0 } : { clipPath: "inset(100% 0% 0% 0%)" }}
       animate={
-        play ? (reduced ? { opacity: 1 } : { clipPath: "inset(0% 0% 0% 0%)" }) : undefined
+        play
+          ? reduced
+            ? { opacity: 1 }
+            : { clipPath: "inset(0% 0% 0% 0%)" }
+          : reduced
+            ? { opacity: 0 }
+            : { clipPath: "inset(100% 0% 0% 0%)" }
       }
       transition={{ duration: reduced ? 0.2 : 1.6, ease: EXHALE }}
     >
@@ -45,7 +51,7 @@ export function HeroImage({ play }: { play: boolean }) {
       <motion.picture
         className="absolute inset-0 block"
         initial={reduced ? false : { scale: 1.12 }}
-        animate={play && !reduced ? { scale: 1 } : undefined}
+        animate={play && !reduced ? { scale: 1 } : reduced ? {} : { scale: 1.12 }}
         transition={{ duration: 2.4, ease: EXHALE }}
       >
         <source media="(max-width: 767px)" srcSet={HERO_IMAGE.portrait} />

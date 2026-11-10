@@ -53,7 +53,9 @@ export function LogoMarkDraw({
               pathLength: { duration, ease: [0.22, 1, 0.36, 1] },
               fillOpacity: { duration: 0.5, delay: duration * 0.75, ease: "easeOut" },
             }}
-            onAnimationComplete={i === 0 ? onComplete : undefined}
+            onAnimationComplete={() => {
+              if (i === 0) onComplete?.();
+            }}
           />
         ))}
       </g>

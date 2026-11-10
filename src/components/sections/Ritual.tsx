@@ -100,7 +100,7 @@ function PinnedRitual() {
     return () => window.removeEventListener("keydown", onKey);
   }, [jump]);
 
-  const step = RITUAL_STEPS[active];
+  const step = RITUAL_STEPS[active] ?? RITUAL_STEPS[0]!;
 
   return (
     <div className="hidden lg:motion-safe:block">

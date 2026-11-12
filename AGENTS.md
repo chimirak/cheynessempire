@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Hosting: the build targets Vercel when `VERCEL` is set (Nitro `vercel` preset in `vite.config.ts`, commands in `vercel.json`); keep both and the default target untouched so the same repo deploys on Vercel and on Lovable.

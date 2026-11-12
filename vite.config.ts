@@ -10,6 +10,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // On Vercel (which sets VERCEL=1 during builds) emit Vercel's Build Output API
+  // (.vercel/output). Everywhere else the default target is used, and Lovable's own
+  // build always pins its own target, so this never affects Lovable publishing.
+  ...(process.env["VERCEL"] ? { nitro: { preset: "vercel" } } : {}),
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
